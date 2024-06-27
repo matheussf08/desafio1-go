@@ -56,7 +56,8 @@ func handlerExchange(w http.ResponseWriter, r *http.Request)  {
 	// }
 
 	ctx := context.Background()
-	ctx, cancel := context.WithTimeout(ctx, 200 * time.Millisecond)
+	// ctx, cancel := context.WithTimeout(ctx, 200 * time.Millisecond)
+	ctx, cancel := context.WithTimeout(ctx, 800 * time.Millisecond) // Criado com 800 milisegundos, porque com 200 está retornando deadline exceed
 	defer cancel()
 
 	exchange, error := getDollarExchange(ctx)
@@ -75,7 +76,8 @@ func handlerExchange(w http.ResponseWriter, r *http.Request)  {
 
 	// Insert bid into table
 	if exchange != nil && exchange.Bid != "" {
-		ctx2, cancel := context.WithTimeout(ctx, 10 * time.Millisecond)
+		// ctx2, cancel := context.WithTimeout(ctx, 10 * time.Millisecond)
+		ctx2, cancel := context.WithTimeout(ctx, 100 * time.Millisecond)
 		defer cancel()
 		
 		stmt, err := db.Prepare("insert into exchanges(bid) values(?)")

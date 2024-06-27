@@ -26,7 +26,8 @@ type Exchange struct {
 } 
 
 func main() {
-	ctx, cancel := context.WithTimeout(context.Background(), 300 * time.Millisecond)
+	// ctx, cancel := context.WithTimeout(context.Background(), 300 * time.Millisecond)
+	ctx, cancel := context.WithTimeout(context.Background(), 500 * time.Millisecond)
 	defer cancel()
 
 	request, err := http.NewRequestWithContext(ctx, "GET", "http://localhost:8080/cotacao", nil)
